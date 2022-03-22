@@ -40,8 +40,13 @@ class ProductsService {
     const product = this.products.find((item) => item.id === id)
 
     if (!product) {
-      throw boom.notFound('Product not found')
+      throw boom.notFound('Product not found')// 404 error
     }
+
+    if(product.isBlock) {
+      throw boom.conflict('Product blocked') // 409 error
+    }
+
     return product
   }
 
